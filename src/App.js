@@ -17,20 +17,16 @@ class BooksApp extends React.Component {
   }
 
   handlshelf = (book, shelf) => {
-    this.setState(state => ({
-      books: state.books.map((bookmap) => {
-          if (bookmap.id === book.id) {
-              bookmap.shelf = shelf
-        }
 
-          return bookmap
-      })
-    }))
-
-   BooksAPI.update(book, shelf).then((response) => {
-
-    })
+      BooksAPI.update(book, shelf)
+          .then(() => {
+              book.shelf = shelf;
+              this.setState(state => ({
+                  books: state.books.filter(item => item.id !== book.id).concat([book])
+              }))
+          })
   }
+
 
 
   render() {
