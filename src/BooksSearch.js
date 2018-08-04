@@ -24,7 +24,7 @@ class BooksSearch extends React.Component {
 
           if (currentBook) {
               bookmap.shelf = currentBook.shelf
-          }
+                } { bookmap.shelf = 'None' }
 
           return bookmap
         })
@@ -45,11 +45,10 @@ class BooksSearch extends React.Component {
       })
     }))
 
-    let curt = this.props.currentBooks.filter((curt) => curt.id === book.id)
+    let curt = this.props.currentBooks.filter((curt) => curt.id === book.id)[0]
 
-    // Is current book exist update shelf else add a new one
     if (curt === false) {
-      let newBook = this.state.books.filter((newBook) => newBook.id === book.id)
+        let newBook = this.state.books.filter((newBook) => newBook.id === book.id)[0]
       this.props.addBook(newBook)
     }
 
