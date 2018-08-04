@@ -10,28 +10,28 @@ class BooksSearch extends React.Component {
   }
 
   handlquery(handledquery) {
-    this.setState({ books: [] })
+      this.setState({ books: [] })
 
-    if (handledquery === '') {
-      return
-    }
-
-    BooksAPI.search(handledquery).then((response) => {
-        if (!response.error) {
-            let books = response.map((bookmap) => {
-
-                let currentBook = this.props.currentBooks.filter((currentBook) => currentBook.id === bookmap.id)[0]
-
-          if (currentBook) {
-              bookmap.shelf = currentBook.shelf
-                } { bookmap.shelf = 'None' }
-
-          return bookmap
-        })
-
-        this.setState({ books: books })
+      if (handledquery === '') {
+          return
       }
-    })
+
+      BooksAPI.search(handledquery).then((response) => {
+          if (!response.error) {
+              let books = response.map((bookmap) => {
+
+                  let currentBook = this.props.currentBooks.filter((currentBook) => currentBook.id === bookmap.id)[0]
+
+                  if (currentBook) {
+                      bookmap.shelf = currentBook.shelf
+                  }
+
+                  return bookmap
+              })
+
+              this.setState({ books: books })
+          }
+      })
   }
 
   handlshelf = (book, shelf) => {
